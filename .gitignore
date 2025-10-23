@@ -26,4 +26,6 @@ inawaves/WW3/model/bin/*.sh
 libraries/*
 !libraries/README.md
 !libraries/lib.sh
-!libraries/*log
+!libraries/build/
+libraries/build/*
+!libraries/build/*_build.log
