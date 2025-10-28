@@ -47,9 +47,9 @@ def run_plot(model, baserun, tsel, ds, var, area_name, out_dir, depth=None):
     file_name = timeinfo.strftime(f"{out_dir}/{area_name.lower().replace(" - ", "_").replace(".", "").replace(" ", "_")}/{param.savename}_%Y%m%d%H.png") # type: ignore
     logging.info(f"File saved at {file_name}")
 
-def main(model, baserun:datetime):
+def main(model, baserun:datetime, out_dir=False):
     timenow = datetime.utcnow()
-    log_dir = timenow.strftime(f"~/logs/inawaves/%Y/%m/%Y%m%d")
+    log_dir = timenow.strftime(f"/home/model-admin/logs/%Y/%m/%Y%m%d")
     log_file = timenow.strftime(f"{log_dir}/plotting_{model}_%Y%m%d_%H.log")
     if not os.path.exists(log_dir):
         os.makedirs(log_dir)
@@ -70,8 +70,9 @@ def main(model, baserun:datetime):
 
     logging.info(f"======Running plotter for {model}======")
     if model == 'inawaves':
-        filepath = baserun.strftime("/data/ofs/output/nc/inawaves/%Y/%m/w3g_hires_%Y%m%d_%H00.nc")
-        out_dir = baserun.strftime("/data/ofs/output/img/inawaves/%Y/%m/%Y%m%d%H")
+        filepath = baserun.strftime("/home/model-admin/ofs-prod/inawaves/post/w3g_hires_%Y%m%d_%H00.nc")
+        if not out_dir:
+            out_dir = baserun.strftime("/data/ofs/output/img/inawaves/%Y/%m/%Y%m%d%H")
         if not os.path.exists(out_dir):
             os.makedirs(out_dir)
         logging.info("======Opening data======")
@@ -134,6 +135,7 @@ if __name__ == "__main__":
     )
     parser.add_argument("model", help="Model. options: inawaves and inaflows")
     parser.add_argument("modelcycle", help="Baserun to process. format: YYYYMMDDHH")
+    parser.add_argument("--out_dir", help="Output directory.")
     args = parser.parse_args()
     baserun = datetime.strptime(args.modelcycle, "%Y%m%d%H")
-    main(args.model, baserun)
+    main(args.model, baserun, args.out_dir)

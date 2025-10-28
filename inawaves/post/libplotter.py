@@ -168,7 +168,7 @@ class plotter:
                 ax.annotate(label, (x, y), xytext=(5, -5), textcoords='offset points', fontsize=15)  # Adjust offset as needed
 
         # Text Section
-        logobox = OffsetImage(plt.imread('/data/ofs/input/img/logo60k.png'),zoom=0.5)
+        logobox = OffsetImage(plt.imread('/home/model-admin/ofs-prod/static/img/logo60k.png'),zoom=0.5)
         varbox = TextArea(
             f"BADAN METEOROLOGI KLIMATOLOGI DAN GEOFISIKA\n{map_title}",
             textprops=dict(
@@ -395,7 +395,7 @@ class plotter:
             linewidth=1, zorder=1)
             
         # Text Section
-        logobox = OffsetImage(plt.imread('/data/ofs/input/img/logo60k.png'),zoom=0.4)
+        logobox = OffsetImage(plt.imread('/home/model-admin/ofs-prod/static/img/logo60k.png'),zoom=0.4)
         varbox = TextArea(
             f"{map_title}",
             textprops=dict(
@@ -1710,7 +1710,7 @@ class wilproCollection:
     wilproCollection('ambon')
     """
     def __init__(self,spick):
-        self.shp = '/home/dev-001/data/shp/metoswilpro/METOS_WILPRO_20231018'
+        self.shp = '/home/model-admin/ofs-prod/static/shp/metoswilpro/METOS_WILPRO_20231018'
         self.gdf_plot = gpd.read_file(f'{self.shp}.shp')
         sdict = {
                 'indonesia' : self.indonesia,
