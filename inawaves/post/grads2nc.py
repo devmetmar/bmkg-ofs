@@ -16,7 +16,8 @@ def grads2netcdf(baserun:datetime, ctl:str):
     cwd = os.getcwd()
     ctlf = cwd+"/"+ctl+".ctl"
     print(f"Reading {ctlf} ...")
-    netcdf = baserun.strftime(f"/data/ofs/output/nc/inawaves/%Y/%m/w3g_{ctl}_%Y%m%d_%H00.nc")
+    netcdf = baserun.strftime(f"/home/model-admin/ofs-prod/inawaves/post/w3g_{ctl}_%Y%m%d_%H00.nc")
+    # netcdf = baserun.strftime(f"/data/ofs/output/nc/inawaves/%Y/%m/w3g_{ctl}_%Y%m%d_%H00.nc")
     if not os.path.exists(os.path.dirname(netcdf)):
         os.makedirs(os.path.dirname(netcdf))
     dset = xgrads.open_CtlDataset(ctlf)
